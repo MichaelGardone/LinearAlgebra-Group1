@@ -1,0 +1,71 @@
+% Group 1
+% Population Growth
+% Leslie matrices, eigenvalues, and eigenvectors
+
+% Problem 1
+disp('Problem 1 -');
+matrix = [ 1   1.5;
+          0.5   0];
+
+% Part A
+val = eig(matrix);
+
+pop = [100; 0;]
+sixYear = []
+fiveYear = []
+disp('Given a population vector of: ');
+disp(pop);
+disp('Find the next six years of population growth.');
+
+populations = cell(6,1);
+populations{1} = pop;
+disp(populations{1});
+% Part B + C
+for i=2:7
+    %pop = matrix * pop;
+    %if i == 5
+    %  fiveYear = pop;
+    %end
+    %if i == 6
+    %  sixYear = pop;
+    %end
+    populations{i} = matrix * populations{i-1};
+    disp(populations{i});
+end
+
+% Part C
+disp("Now compare year 6 of Leslie matrices to year 6 with eigenvalues:");
+disp(populations{7});
+disp(val(1) * populations{6});
+
+
+% Problem 3
+disp("Problem 3");
+
+% Part A
+dogMat = [3 4 0;
+	  0.9 0 0;
+	  0 0.75 0];
+
+disp("================");
+
+disp("ROW 1 - Fecundity");
+disp("ROW 2 - Survivorship from 0-5 -> 5-10");
+disp("ROW 3 - Survivorship from 5-10 -> 10-15");
+
+disp(dogMat);
+
+disp("================");
+
+initPop = [ 1000; 1000; 1000];
+
+% Part B
+for i=1:20
+    disp("Population in year " + i);
+    initPop = dogMat * initPop;
+    disp(initPop);
+end
+
+% Part C
+dogVal = eig(dogMat);
+disp("The net reproductive rate  of this matrix is: " + dogVal + "(eigen value)");
